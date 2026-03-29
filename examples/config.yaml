@@ -1,0 +1,318 @@
+# 智能文档生成工具配置文件示例
+# 保存为 config.yaml 或 config.yml
+
+# 应用基本配置
+app:
+  name: "smart-doc-generator"
+  version: "0.1.0"
+  log_level: "info"  # debug, info, warn, error
+  environment: "development"  # development, testing, production
+
+# 模板配置
+templates:
+  # 模板目录路径
+  directory: "./templates"
+
+  # 默认模板
+  default_template: "default.docx"
+
+  # 模板缓存
+  cache_enabled: true
+  cache_ttl: 3600  # 缓存有效期（秒）
+
+  # 模板文件扩展名
+  allowed_extensions:
+    - "docx"
+    - "txt"
+    - "md"
+    - "html"
+    - "json"
+
+# 输出配置
+output:
+  # 默认输出格式
+  default_format: "docx"  # docx, xlsx, pdf, html, txt
+
+  # 输出目录
+  directory: "./output"
+
+  # 文件命名模式
+  filename_pattern: "{title}_{date}_{timestamp}"
+
+  # 压缩选项
+  compression:
+    enabled: true
+    level: 6  # 0-9，0=无压缩，9=最大压缩
+
+  # 质量设置（适用于图片等）
+  quality: 90  # 0-100
+
+# 文档生成选项
+generation:
+  # 默认页面设置
+  page_settings:
+    size: "A4"  # A4, Letter, Legal, 或自定义 "210x297"
+    orientation: "portrait"  # portrait, landscape
+    margins:
+      top: 25.4  # 毫米
+      bottom: 25.4
+      left: 31.8
+      right: 31.8
+
+  # 默认样式
+  default_styles:
+    title:
+      font:
+        family: "Calibri"
+        size: 16
+        bold: true
+      alignment: "center"
+
+    heading1:
+      font:
+        family: "Calibri"
+        size: 14
+        bold: true
+      alignment: "left"
+
+    normal:
+      font:
+        family: "Calibri"
+        size: 11
+      alignment: "left"
+      line_spacing: 1.15
+
+    table_header:
+      font:
+        family: "Calibri"
+        size: 11
+        bold: true
+      background_color: "#F2F2F2"
+
+    table_cell:
+      font:
+        family: "Calibri"
+        size: 11
+      border:
+        enabled: true
+        width: 0.5
+        color: "#CCCCCC"
+
+# AI集成配置（可选）
+ai:
+  enabled: false  # 是否启用AI功能
+
+  # OpenAI配置
+  openai:
+    api_key: "${OPENAI_API_KEY}"  # 从环境变量读取
+    model: "gpt-3.5-turbo"
+    temperature: 0.7
+    max_tokens: 1000
+
+  # 本地模型配置
+  local:
+    model_path: "./models/llama-2-7b"
+    context_size: 2048
+
+  # AI功能配置
+  features:
+    content_generation: true  # 内容生成
+    template_recommendation: true  # 模板推荐
+    style_suggestion: true  # 样式建议
+    grammar_check: true  # 语法检查
+
+# 服务配置（如果启用HTTP服务）
+server:
+  enabled: false  # 是否启用HTTP服务
+
+  # 网络配置
+  host: "0.0.0.0"
+  port: 8080
+
+  # 性能配置
+  workers: 4  # 工作线程数
+  max_concurrent_requests: 100  # 最大并发请求数
+  request_timeout: 30  # 请求超时（秒）
+
+  # 安全配置
+  cors:
+    enabled: true
+    allowed_origins:
+      - "http://localhost:3000"
+      - "http://127.0.0.1:3000"
+
+  # 认证配置（可选）
+  authentication:
+    enabled: false
+    jwt_secret: "${JWT_SECRET}"
+    token_expiry: 86400  # token有效期（秒）
+
+# 数据库配置（可选）
+database:
+  enabled: false
+
+  # SQLite配置
+  sqlite:
+    path: "./data/smart-doc.db"
+
+  # PostgreSQL配置
+  postgres:
+    host: "localhost"
+    port: 5432
+    database: "smartdoc"
+    username: "${DB_USERNAME}"
+    password: "${DB_PASSWORD}"
+    pool_size: 10
+
+# 缓存配置
+cache:
+  # 内存缓存
+  memory:
+    enabled: true
+    max_size: 100  # 最大缓存项目数
+    ttl: 300  # 缓存有效期（秒）
+
+  # Redis缓存（可选）
+  redis:
+    enabled: false
+    host: "localhost"
+    port: 6379
+    password: "${REDIS_PASSWORD}"
+    database: 0
+
+# 监控和日志
+monitoring:
+  # 指标收集
+  metrics:
+    enabled: true
+    port: 9090  # Prometheus metrics端口
+
+  # 日志配置
+  logging:
+    file:
+      enabled: true
+      path: "./logs/smart-doc.log"
+      max_size: 10485760  # 10MB
+      max_files: 5
+
+    # 结构化日志字段
+    fields:
+      service: "smart-doc"
+      environment: "${APP_ENV}"
+
+  # 分布式追踪（可选）
+  tracing:
+    enabled: false
+    exporter: "jaeger"  # jaeger, zipkin, otlp
+    endpoint: "http://localhost:14268/api/traces"
+
+# 任务队列配置（可选）
+queue:
+  enabled: false
+
+  # Redis队列
+  redis:
+    host: "localhost"
+    port: 6379
+    queue_name: "smart-doc-queue"
+
+  # 任务重试配置
+  retry:
+    max_attempts: 3
+    backoff_multiplier: 2.0
+    initial_delay: 1.0  # 秒
+
+# 插件系统配置
+plugins:
+  enabled: false
+
+  # 插件目录
+  directory: "./plugins"
+
+  # 允许的插件类型
+  allowed_types:
+    - "generator"  # 文档生成器插件
+    - "template"   # 模板引擎插件
+    - "filter"     # 过滤器插件
+    - "function"   # 函数插件
+
+# 国际化配置
+i18n:
+  default_locale: "zh-CN"
+  supported_locales:
+    - "zh-CN"
+    - "en-US"
+    - "ja-JP"
+
+  # 翻译文件目录
+  directory: "./locales"
+
+# 主题配置
+themes:
+  # 默认主题
+  default: "light"
+
+  # 可用主题
+  available:
+    light:
+      name: "浅色主题"
+      colors:
+        primary: "#1a365d"
+        secondary: "#2d3748"
+        background: "#ffffff"
+        text: "#2d3748"
+        accent: "#4299e1"
+
+    dark:
+      name: "深色主题"
+      colors:
+        primary: "#63b3ed"
+        secondary: "#a0aec0"
+        background: "#1a202c"
+        text: "#e2e8f0"
+        accent: "#4299e1"
+
+    corporate:
+      name: "企业主题"
+      colors:
+        primary: "#2c5282"
+        secondary: "#4a5568"
+        background: "#f7fafc"
+        text: "#2d3748"
+        accent: "#3182ce"
+
+# 高级配置
+advanced:
+  # 内存限制
+  memory_limit: 1073741824  # 1GB，单位：字节
+
+  # 文件上传限制
+  upload_limit: 10485760  # 10MB，单位：字节
+
+  # 临时文件目录
+  temp_dir: "/tmp/smart-doc"
+
+  # 清理临时文件
+  cleanup_temp_files: true
+  cleanup_interval: 3600  # 清理间隔（秒）
+
+  # 性能优化
+  optimization:
+    use_parallel_processing: true
+    max_parallel_tasks: 4
+    chunk_size: 1024  # 处理大文件时的分块大小
+
+# 环境变量覆盖
+# 配置中的 ${VAR_NAME} 会被环境变量替换
+# 优先级：环境变量 > 配置文件 > 默认值
+
+# 使用示例：
+# 1. 基本使用：直接使用默认配置
+# 2. 自定义配置：修改需要的部分
+# 3. 环境特定配置：创建 development.yaml, production.yaml
+# 4. 环境变量覆盖：export SMART_DOC_LOG_LEVEL=debug
+
+# 注意：
+# 1. 所有路径可以是相对路径或绝对路径
+# 2. 数值单位：尺寸=毫米，时间=秒，大小=字节
+# 3. 颜色使用十六进制格式或CSS颜色名称

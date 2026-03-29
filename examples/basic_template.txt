@@ -1,0 +1,12 @@
+# {{title}}
+
+作者: {{author}}
+日期: {{date}}
+
+{{content}}
+
+---
+
+这是一个简单的文档模板示例。
+当前时间: {{current_time}}
+文档版本: {{version}}

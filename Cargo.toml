@@ -1,0 +1,69 @@
+[package]
+name = "smart-doc-core"
+version = "0.1.0"
+edition = "2024"
+description = "智能文档生成工具 - 基于Rust的个人学习项目"
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
+repository = "https://github.com/your-username/smart-doc-core"
+readme = "README.md"
+keywords = ["document", "generator", "docx", "excel", "pdf", "template"]
+categories = ["text-processing", "template-engine"]
+
+# 工作区配置（未来可以扩展为多crate）
+[workspace]
+members = []
+
+# 依赖配置
+[dependencies]
+# 核心库
+anyhow = "1.0"          # 错误处理
+thiserror = "1.0"       # 自定义错误类型
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+log = "0.4"
+env_logger = "0.10"
+
+# 命令行接口
+clap = { version = "4.0", features = ["derive", "env"] }
+
+# 文档处理（第一阶段）
+rdocx = "0.1.2"           # DOCX文档处理
+tera = "1.20.1"           # 模板引擎
+quick-xml = "0.31"      # XML处理
+zip = "0.6"             # ZIP压缩
+
+# 工具库
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.0", features = ["v4", "serde"] }
+
+# 开发依赖
+[dev-dependencies]
+tempfile = "3.8"        # 临时文件测试
+rstest = "0.18"         # 参数化测试
+assert_fs = "1.0"       # 文件系统断言
+
+# 构建配置
+[profile.dev]
+opt-level = 1
+debug = true
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+debug = false
+
+# 二进制配置
+[[bin]]
+name = "smart-doc"
+path = "src/bin/main.rs"
+test = false
+bench = false
+
+# 库配置
+[lib]
+name = "smart_doc_core"
+path = "src/lib.rs"
+test = true
+bench = false

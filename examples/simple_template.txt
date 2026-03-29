@@ -1,0 +1,43 @@
+# {{title}}
+
+## 文档信息
+- **作者**: {{author}}
+- **日期**: {{date}}
+- **版本**: {{version}}
+
+## 内容摘要
+{{content}}
+
+## 详细内容
+
+### 项目概述
+{{project_overview}}
+
+### 主要功能
+{% for feature in features %}
+- {{feature}}
+{% endfor %}
+
+### 技术栈
+{% for tech in technologies %}
+- **{{tech.name}}**: {{tech.description}}
+{% endfor %}
+
+### 项目状态
+| 模块 | 状态 | 进度 |
+|------|------|------|
+{% for module in modules %}
+| {{module.name}} | {{module.status}} | {{module.progress}} |
+{% endfor %}
+
+### 下一步计划
+{% for task in next_tasks %}
+{{loop.index}}. {{task}}
+{% endfor %}
+
+## 总结
+{{summary}}
+
+---
+*文档生成时间: {{generated_at}}*
+*生成工具: smart-doc v{{tool_version}}*
