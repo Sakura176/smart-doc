@@ -8,7 +8,7 @@ pub mod generator;
 pub mod style;
 
 // 重新导出常用类型
-pub use document::{Document, DocElement, DocumentMetadata};
+pub use document::{DocElement, Document, DocumentMetadata};
 pub use generator::DocumentGenerator;
 // pub use template::TemplateEngine;
 pub use style::{Style, StyleManager};

@@ -1,3 +1,1 @@
-pub struct DocumentGenerator {
-
-}
+pub struct DocumentGenerator {}

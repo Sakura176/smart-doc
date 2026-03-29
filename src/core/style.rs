@@ -1,15 +1,10 @@
 #[derive(Debug, Clone, PartialEq)]
-pub struct Style {
+pub struct Style {}
 
-}
-
-pub struct StyleManager {
-
-}
+pub struct StyleManager {}
 
 impl StyleManager {
     pub fn new() -> Self {
         Self {}
     }
-
 }

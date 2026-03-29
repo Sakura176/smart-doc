@@ -2,14 +2,14 @@
 //!
 //! 这是一个基于 Rust 的个人学习项目，提供文档生成的核心功能。
 
-pub mod core;
 pub mod cli;
+pub mod core;
 pub mod error;
 
 /// 重新导出常用类型
 pub use crate::core::document::Document;
 pub use crate::core::generator::DocumentGenerator;
-pub use crate::error::{Result, Error};
+pub use crate::error::{Error, Result};
 
 /// 库版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

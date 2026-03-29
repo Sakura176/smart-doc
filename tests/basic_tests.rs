@@ -3,7 +3,7 @@
 //! 测试智能文档生成工具的核心功能。
 
 use smart_doc_core::core::document::{Document, DocumentBuilder};
-use smart_doc_core::core::{OutputFormat, GenerateOptions};
+use smart_doc_core::core::{GenerateOptions, OutputFormat};
 use smart_doc_core::error::Result;
 use tempfile::NamedTempFile;
 
@@ -139,7 +139,10 @@ fn test_document_metadata() {
 
     // 测试添加自定义元数据
     doc.add_custom_metadata("custom_key", "custom_value");
-    assert_eq!(doc.metadata.custom.get("custom_key"), Some(&"custom_value".to_string()));
+    assert_eq!(
+        doc.metadata.custom.get("custom_key"),
+        Some(&"custom_value".to_string())
+    );
 }
 
 /// 测试文档元素操作
@@ -328,10 +331,17 @@ fn test_error_types() {
     assert!(matches!(data_parse_error, Error::DataParse(_)));
 
     let unsupported_format_error = Error::unsupported_format("xyz");
-    assert!(matches!(unsupported_format_error, Error::UnsupportedFormat(_)));
+    assert!(matches!(
+        unsupported_format_error,
+        Error::UnsupportedFormat(_)
+    ));
 
     // 测试错误显示
     assert!(template_error.to_string().contains("模板错误"));
     assert!(data_parse_error.to_string().contains("数据解析错误"));
-    assert!(unsupported_format_error.to_string().contains("不支持的格式"));
+    assert!(
+        unsupported_format_error
+            .to_string()
+            .contains("不支持的格式")
+    );
 }

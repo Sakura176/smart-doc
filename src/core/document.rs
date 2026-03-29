@@ -361,11 +361,7 @@ impl Document {
         // 转换字符串为表格单元格
         let table_rows: Vec<Vec<TableCell>> = rows
             .into_iter()
-            .map(|row| {
-                row.into_iter()
-                    .map(|cell| TableCell::new(cell))
-                    .collect()
-            })
+            .map(|row| row.into_iter().map(|cell| TableCell::new(cell)).collect())
             .collect();
 
         self.elements.push(DocElement::Table {
@@ -389,11 +385,7 @@ impl Document {
         // 转换字符串为表格单元格
         let table_rows: Vec<Vec<TableCell>> = rows
             .into_iter()
-            .map(|row| {
-                row.into_iter()
-                    .map(|cell| TableCell::new(cell))
-                    .collect()
-            })
+            .map(|row| row.into_iter().map(|cell| TableCell::new(cell)).collect())
             .collect();
 
         self.elements.push(DocElement::Table {
@@ -476,7 +468,11 @@ impl Document {
     }
 
     /// 添加样式
-    pub fn add_style(&mut self, name: impl Into<String>, style: crate::core::style::Style) -> &mut Self {
+    pub fn add_style(
+        &mut self,
+        name: impl Into<String>,
+        style: crate::core::style::Style,
+    ) -> &mut Self {
         self.styles.insert(name.into(), style);
         self
     }
@@ -525,7 +521,11 @@ impl Document {
     }
 
     /// 添加自定义元数据
-    pub fn add_custom_metadata(&mut self, key: impl Into<String>, value: impl Into<String>) -> &mut Self {
+    pub fn add_custom_metadata(
+        &mut self,
+        key: impl Into<String>,
+        value: impl Into<String>,
+    ) -> &mut Self {
         self.metadata.custom.insert(key.into(), value.into());
         self
     }
@@ -569,7 +569,11 @@ impl DocumentBuilder {
     }
 
     /// 添加带样式的段落
-    pub fn paragraph_with_style(mut self, text: impl Into<String>, style: impl Into<String>) -> Self {
+    pub fn paragraph_with_style(
+        mut self,
+        text: impl Into<String>,
+        style: impl Into<String>,
+    ) -> Self {
         self.document.add_paragraph_with_style(text, style);
         self
     }

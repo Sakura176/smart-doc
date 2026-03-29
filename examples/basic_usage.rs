@@ -2,10 +2,10 @@
 //!
 //! 这个示例展示了如何使用 smart-doc-core 库创建和生成文档。
 
-use smart_doc_core::core::document::{Document, DocumentBuilder};
-use smart_doc_core::core::{OutputFormat, GenerateOptions, PageSettings, PageSize, Margins};
-use smart_doc_core::error::Result;
 use smart_doc_core::cli;
+use smart_doc_core::core::document::{Document, DocumentBuilder};
+use smart_doc_core::core::{GenerateOptions, Margins, OutputFormat, PageSettings, PageSize};
+use smart_doc_core::error::Result;
 
 fn main() -> Result<()> {
     println!("智能文档生成工具 - 基础使用示例");
@@ -87,10 +87,26 @@ fn example_use_document_builder() -> Result<()> {
         .table_with_headers(
             vec!["任务".to_string(), "负责人".to_string(), "进度".to_string()],
             vec![
-                vec!["需求分析".to_string(), "张三".to_string(), "100%".to_string()],
-                vec!["设计阶段".to_string(), "李四".to_string(), "80%".to_string()],
-                vec!["开发阶段".to_string(), "王五".to_string(), "60%".to_string()],
-                vec!["测试阶段".to_string(), "赵六".to_string(), "20%".to_string()],
+                vec![
+                    "需求分析".to_string(),
+                    "张三".to_string(),
+                    "100%".to_string(),
+                ],
+                vec![
+                    "设计阶段".to_string(),
+                    "李四".to_string(),
+                    "80%".to_string(),
+                ],
+                vec![
+                    "开发阶段".to_string(),
+                    "王五".to_string(),
+                    "60%".to_string(),
+                ],
+                vec![
+                    "测试阶段".to_string(),
+                    "赵六".to_string(),
+                    "20%".to_string(),
+                ],
             ],
         )
         .paragraph("下一步计划：")
@@ -105,7 +121,9 @@ fn example_use_document_builder() -> Result<()> {
     println!("文档标题: {}", doc.title());
     println!("文档作者: {}", doc.author());
     println!("表格行数: {}", {
-        if let Some(smart_doc_core::core::document::DocElement::Table { rows, .. }) = doc.elements.get(2) {
+        if let Some(smart_doc_core::core::document::DocElement::Table { rows, .. }) =
+            doc.elements.get(2)
+        {
             rows.len()
         } else {
             0
@@ -209,9 +227,14 @@ fn example_cli_functionality() -> Result<()> {
 
     // 演示CLI功能（这里只是打印信息，实际调用需要实现）
     println!("\nCLI命令示例:");
-    println!("1. 生成文档: smart-doc generate --template {} --data {} --output output.txt",
-             template_path, data_path);
-    println!("2. 验证模板: smart-doc validate --template {}", template_path);
+    println!(
+        "1. 生成文档: smart-doc generate --template {} --data {} --output output.txt",
+        template_path, data_path
+    );
+    println!(
+        "2. 验证模板: smart-doc validate --template {}",
+        template_path
+    );
     println!("3. 列出模板: smart-doc list");
     println!("4. 查看信息: smart-doc info --template {}", template_path);
 

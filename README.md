@@ -32,8 +32,8 @@
 ### 安装和运行
 ```bash
 # 克隆项目
-git clone https://github.com/your-username/smart-doc-core.git
-cd smart-doc-core
+git clone https://github.com/Sakura176/smart-doc.git
+cd smart-doc
 
 # 构建项目
 cargo build --release
