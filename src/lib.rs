@@ -5,6 +5,7 @@
 pub mod cli;
 pub mod core;
 pub mod error;
+pub mod formatters;
 pub mod xml;
 
 /// 重新导出常用类型

@@ -78,6 +78,24 @@
        metadata: DocumentMetadata,
    }
    ```
+   ```
+    
+src/formatters/docx/
+├── mod.rs           # 模块导出 + DocxFormatter
+├── context.rs       # 文档上下文（管理ID、样式映射）
+├── writer.rs        # 主写入器入口
+├── zip_builder.rs   # ZIP 打包
+├── parts/           # XML 部件
+│   ├── mod.rs
+│   ├── content_types.rs
+│   ├── document.rs     # document.xml 生成
+│   ├── styles.rs       # styles.xml 生成
+│   └── settings.rs    # settings.xml 生成
+└── elements/        # 元素序列化
+    ├── mod.rs
+    ├── paragraph.rs
+    └── text.rs       # 文本/_RUN
+   ```
 
 4. 实现基本的模板渲染逻辑
 

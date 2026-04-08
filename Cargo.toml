@@ -31,7 +31,7 @@ clap = { version = "4.0", features = ["derive", "env"] }
 rdocx = "0.1.2"           # DOCX文档处理
 tera = "1.20.1"           # 模板引擎
 quick-xml = "0.31"      # XML处理
-zip = "0.6"             # ZIP压缩
+zip = "2.0"             # ZIP压缩
 
 # 工具库
 chrono = { version = "0.4", features = ["serde"] }
