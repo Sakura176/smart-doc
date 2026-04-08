@@ -5,6 +5,7 @@
 pub mod cli;
 pub mod core;
 pub mod error;
+pub mod xml;
 
 /// 重新导出常用类型
 pub use crate::core::document::Document;

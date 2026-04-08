@@ -110,12 +110,12 @@ fn example_use_document_builder() -> Result<()> {
             ],
         )
         .paragraph("下一步计划：")
-        .add_ordered_list(vec![
-            "完成核心功能开发".to_string(),
-            "进行集成测试".to_string(),
-            "编写用户文档".to_string(),
-            "发布v1.0版本".to_string(),
-        ])
+        // .add_ordered_list(vec![
+        //     "完成核心功能开发".to_string(),
+        //     "进行集成测试".to_string(),
+        //     "编写用户文档".to_string(),
+        //     "发布v1.0版本".to_string(),
+        // ])
         .build();
 
     println!("文档标题: {}", doc.title());

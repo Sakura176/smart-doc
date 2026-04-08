@@ -91,15 +91,30 @@ fn test_output_format_display() {
 fn test_output_format_from_str() {
     use std::str::FromStr;
 
-    assert_eq!(OutputFormat::from_str("docx"), Ok(OutputFormat::Docx));
-    assert_eq!(OutputFormat::from_str("xlsx"), Ok(OutputFormat::Xlsx));
-    assert_eq!(OutputFormat::from_str("pdf"), Ok(OutputFormat::Pdf));
-    assert_eq!(OutputFormat::from_str("html"), Ok(OutputFormat::Html));
-    assert_eq!(OutputFormat::from_str("txt"), Ok(OutputFormat::Text));
+    assert_eq!(
+        <OutputFormat as FromStr>::from_str("docx"),
+        Ok(OutputFormat::Docx)
+    );
+    assert_eq!(
+        <OutputFormat as FromStr>::from_str("xlsx"),
+        Ok(OutputFormat::Xlsx)
+    );
+    assert_eq!(
+        <OutputFormat as FromStr>::from_str("pdf"),
+        Ok(OutputFormat::Pdf)
+    );
+    assert_eq!(
+        <OutputFormat as FromStr>::from_str("html"),
+        Ok(OutputFormat::Html)
+    );
+    assert_eq!(
+        <OutputFormat as FromStr>::from_str("txt"),
+        Ok(OutputFormat::Text)
+    );
 
     // 测试错误情况
-    assert!(OutputFormat::from_str("invalid").is_err());
-    assert!(OutputFormat::from_str("").is_err());
+    assert!(<OutputFormat as FromStr>::from_str("invalid").is_err());
+    assert!(<OutputFormat as FromStr>::from_str("").is_err());
 }
 
 /// 测试生成选项默认值
@@ -124,7 +139,7 @@ fn test_document_metadata() {
     assert_eq!(doc.metadata.author, "测试作者");
     assert_eq!(doc.metadata.subject, None);
     assert!(doc.metadata.keywords.is_empty());
-    assert!(!doc.metadata.custom.is_empty()); // 创建时间等会被设置
+    assert!(doc.metadata.custom.is_empty());
 
     // 测试添加关键词
     doc.add_keyword("测试");

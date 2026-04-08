@@ -180,6 +180,13 @@ impl From<zip::result::ZipError> for Error {
     }
 }
 
+/// 从str错误转换
+impl From<&str> for Error {
+    fn from(err: &str) -> Self {
+        Error::Other(err.to_string())
+    }
+}
+
 /// 错误处理工具函数
 pub trait ResultExt<T> {
     /// 添加上下文信息

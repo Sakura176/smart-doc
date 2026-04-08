@@ -8,7 +8,7 @@ pub mod generator;
 pub mod style;
 
 // 重新导出常用类型
-pub use document::{DocElement, Document, DocumentMetadata};
+pub use document::{DocElement, Document, DocumentBuilder, DocumentMetadata};
 pub use generator::DocumentGenerator;
 // pub use template::TemplateEngine;
 pub use style::{Style, StyleManager};
@@ -99,7 +99,7 @@ pub struct GenerateOptions {
 }
 
 /// 页面设置
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct PageSettings {
     /// 页面大小
     pub size: PageSize,
@@ -110,7 +110,7 @@ pub struct PageSettings {
 }
 
 /// 页面大小
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum PageSize {
     /// A4 纸张 (210mm × 297mm)
     A4,
@@ -141,7 +141,7 @@ impl Default for PageSize {
 }
 
 /// 页面方向
-#[derive(Debug, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, Default, PartialEq)]
 pub enum PageOrientation {
     /// 纵向
     #[default]
@@ -151,7 +151,7 @@ pub enum PageOrientation {
 }
 
 /// 页边距
-#[derive(Debug, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, Default, PartialEq)]
 pub struct Margins {
     /// 上边距 (毫米)
     pub top: f32,

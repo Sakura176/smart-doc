@@ -2,6 +2,7 @@
 //!
 //! 提供命令行工具的功能实现。
 
+use crate::core::DocumentBuilder;
 use crate::error::{Error, Result};
 use log::{error, info, warn};
 use std::path::Path;
@@ -64,6 +65,12 @@ fn generate_docx_document(
 
     info!("使用模板: {}", template_path.display());
 
+    let builder = DocumentBuilder::new();
+    builder.title(
+        data.get("title")
+            .and_then(|v| v.as_str())
+            .unwrap_or("未命名文档"),
+    );
     // 创建简单的文档内容
     let title = data
         .get("title")
